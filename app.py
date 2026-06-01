@@ -5,8 +5,8 @@ import time
 app = Flask(__name__)
 
 REQUEST_COUNT = Counter(
-    'flask_request_count',
-    'Total request count',
+    'flask_request_count', # variable id for grafana
+    'Total request count', # descripton
     ['method', 'endpoint','status']
 )
 
@@ -19,7 +19,7 @@ REQUEST_LATENCY = Histogram(
 @app.before_request
 def start_timer():
     request._start_time = time.time()
-    
+
 @app.after_request
 def record_metrics(response):
     latency = time.time() - request._start_time
